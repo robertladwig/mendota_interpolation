@@ -290,7 +290,7 @@ ggsave(file=paste0('wtemp_heatmap_lter_hourly.png'), h3, dpi = 300,width = 18,he
 ##### (7) Reverse matrix:
 mydata_test <- observed_df
 
-deps = seq(min(mydata_test$Depth), max(mydata_test$Depth), 1)
+deps = seq(min(mydata_test$Depth), max(mydata_test$Depth), 0.5)
 p.data <- c()
 for (ki in unique(mydata_test$DateTime)){
   yi <- which(mydata_test$DateTime == ki)
@@ -312,7 +312,7 @@ print('Finished reversing the wtemp data')
 
 data <- as.data.frame(cbind(rep(1, length(unique(mydata_test$DateTime))), p.data))
 colnames(data) <- c('date',paste0('temp_',deps))
-data$date = as.Date(sort(unique(mydata_test$DateTime )))
+data$date = (sort(unique(mydata_test$DateTime )))
 
 ##### (8) Save data file:
 save(data, file = 'observed_df_lter_hourly_wide.RData')
